@@ -121,3 +121,58 @@ docker-compose logs -f app
     { "message": "유효하지 않은 주문 금액입니다." }
     { "message": "주문 처리에 실패했습니다." }
     ```
+
+---
+
+## 🗄️ 데이터베이스 ERD
+
+    MEMBER {
+      BIGINT   id             PK "회원 ID"
+      VARCHAR  name            "회원 이름"
+      VARCHAR  email           "이메일"
+      DATETIME created_at      "생성 일시"
+      DATETIME updated_at      "수정 일시"
+    }
+
+    PRODUCT {
+      BIGINT   id             PK "상품 ID"
+      VARCHAR  name            "상품명"
+      DECIMAL  price           "단가"
+      DATETIME created_at      "생성 일시"
+      DATETIME updated_at      "수정 일시"
+    }
+
+    ORDER {
+      BIGINT   id             PK "주문 ID"
+      BIGINT   member_id      FK → MEMBER.id "주문자"
+      DECIMAL  total_amount    "총 주문 금액"
+      VARCHAR  status          "주문 상태 (CREATED/PAID/CANCELED)"
+      DATETIME created_at      "생성 일시"
+      DATETIME updated_at      "수정 일시"
+    }
+
+    ORDER_ITEM {
+      BIGINT   id             PK "주문 항목 ID"
+      BIGINT   order_id       FK → ORDER.id  "주문 참조"
+      BIGINT   product_id     FK → PRODUCT.id "상품 참조"
+      INT      quantity        "수량"
+      DECIMAL  unit_price      "주문 시 단가"
+      DATETIME created_at      "생성 일시"
+      DATETIME updated_at      "수정 일시"
+    }
+
+    PAYMENT {
+      BIGINT   id             PK "결제 ID"
+      BIGINT   order_id       FK → ORDER.id  "주문 참조"
+      VARCHAR  payment_type    "결제 수단 (PG/POINT/COUPON/BNPL)"
+      DECIMAL  amount          "결제 금액"
+      BOOLEAN  is_main         "메인 결제 수단 여부"
+      VARCHAR  status          "결제 상태 (SUCCESS/FAILED)"
+      VARCHAR  transaction_id  "거래 또는 에러 코드"
+      DATETIME created_at      "생성 일시"
+      DATETIME updated_at      "수정 일시"
+      INT      points_used     "사용 포인트 (POINT)"
+      VARCHAR  coupon_code     "쿠폰 코드 (COUPON)"
+      DECIMAL  coupon_amount   "쿠폰 할인 금액 (COUPON)"
+    }
+```
