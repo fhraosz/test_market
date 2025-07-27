@@ -1,4 +1,4 @@
-package com.cashnote.market_order.service.dto;
+package com.cashnote.market_order.dto;
 
 import lombok.*;
 

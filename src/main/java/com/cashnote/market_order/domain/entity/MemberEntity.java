@@ -1,21 +1,33 @@
 package com.cashnote.market_order.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "member")
+@Table(name = "MEMBER")
 public class MemberEntity {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // 회원아이디
-	
-    private String name; // 이름
-    
-    private String email; // 이메일
+    private Long id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 }

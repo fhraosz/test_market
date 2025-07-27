@@ -1,15 +1,20 @@
 package com.cashnote.market_order.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "order_item")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "ORDER_ITEM")
 public class OrderItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +27,27 @@ public class OrderItemEntity {
 	private Long productId;
 	
 	@Column(name = "quantity", nullable = false)
-	private Integer quantity; // 수량
+	private Integer quantity;
 	
 	@Column(name = "unit_price", nullable = false)
-	private BigDecimal unitPrice; // 주문가
+	private BigDecimal unitPrice;
+
+	@Column(name = "created_at", nullable = false)
+	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at", nullable = false)
+	private LocalDateTime updatedAt;
+
+	public static OrderItemEntity of(Long orderId, Long productId, Integer quantity, BigDecimal unitPrice) {
+		LocalDateTime now = LocalDateTime.now();
+
+		return OrderItemEntity.builder()
+				.orderId(orderId)
+				.productId(productId)
+				.quantity(quantity)
+				.unitPrice(unitPrice)
+				.createdAt(now)
+				.updatedAt(now)
+				.build();
+	}
 }

@@ -1,4 +1,4 @@
-package com.cashnote.market_order.service.dto;
+package com.cashnote.market_order.dto;
 
 import com.cashnote.market_order.domain.enums.PaymentType;
 import lombok.*;
@@ -10,9 +10,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class PaymentDto {
+
 	private PaymentType type;
-
 	private BigDecimal amount;
-
-	private Boolean isMain;	
+	private Boolean isMain;
 }
