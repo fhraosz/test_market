@@ -105,14 +105,14 @@ docker-compose logs -f app
     ```json
     {
       "memberId": 1,
-      "totalAmount": 1900000,
+      "totalAmount": 2300000,
       "orderItemDtoList": [
         { "productId": 101, "quantity": 1 },
         { "productId": 102, "quantity": 1 }
       ],
       "paymentDtoList": [
         { "type": "PG",    "amount": 1500000, "isMain": true  },
-        { "type": "POINT", "amount":  400000, "isMain": false }
+        { "type": "POINT", "amount":  800000, "isMain": false }
       ]
     }
     ```
